@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# A lazy script to see if a project is harboring files that don't belong to it according to lustre
+
+if [ $# -ne 3 ]; then
+  echo "Lazy tree search"
+  echo "Usage: $0 <levels> <fs> <projectcode>"
+  exit 0
+fi
+
+tree -f -d -g -L $1 "/$2/$3" | grep -ve "\[$3*"

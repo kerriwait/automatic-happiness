@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# A lazy script to report on lfs quotas and usage
+
+if [ $# -ne 1 ]; then
+  echo "Lazy lustre info"
+  echo "Usage: $0 <projectcode>"
+  exit 0
+fi
+
+lfs quota -gh $1 /projects
+lfs quota -gh $1 /scratch
