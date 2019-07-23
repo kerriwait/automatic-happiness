@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# A lazy script to search for files belonging to a certain group in a lustre project dir
+
+if [ $# -ne 2 ]; then
+  echo "Lazy projects search"
+  echo "Usage: $0 <project> <group>"
+  exit 0
+fi
+
+lfs find -group $2 /projects/$1 > ~/$1.txt
+export numfiles=`wc -l ~/$1.txt`
+echo "search found: $numfiles"

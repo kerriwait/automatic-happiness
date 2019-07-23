@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# A lazy script to search for files belonging to a certain group in a lustre scratch dir
+
+if [ $# -ne 2 ]; then
+  echo "Lazy scratch search"
+  echo "Usage: $0 <project> <group>"
+  exit 0
+fi
+
+lfs find -group $2 /scratch/$1 > ~/$1s.txt
+export numfiles=`wc -l ~/$1s.txt`
+echo "search found: $numfiles"

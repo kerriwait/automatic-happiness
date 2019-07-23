@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# A lazy script to print out lustre usage for each member of a project
+
+if [ $# -ne 1 ]; then
+  echo "Lazy lustre group info"
+  echo "Usage: $0 <project>"
+  exit 0
+fi
+
+for member in `getent group $1 | awk -F":" '{ print $4 }' | tr "," "\n"`
+do
+	export proj=`lfs quota -u $member /projects | awk -F" " 'FNR > 2 { print $2 }'`
+        export scratch=`lfs quota -u $member /scratch | awk -F" " 'FNR > 2 { print $2 }'`
+	echo $member, $proj, $scratch
+done
