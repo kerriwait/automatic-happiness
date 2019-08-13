@@ -2,16 +2,16 @@
 
 # A lazy script to search for files belonging to a certain group in a lustre project dir
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 3 ]; then
   echo "Lazy projects search"
-  echo "Usage: $0 <project> <group>"
+  echo "Usage: $0 <project> <group> <outdir>"
   exit 0
 fi
 
 echo "Searching project $1"
-lfs find -group $2 /projects/$1 > ~/lu/$1-$2.txt
-#lfs find -group $2 /scratch/$1 > ~/lu/$1s-$2.txt
-export numfiles=`wc -l ~/lu/$1-$2.txt`
+lfs find -group $2 /projects/$1 > $3/$1-$2.txt
+lfs find -group $2 /scratch/$1 > $3/$1s-$2.txt
+export numfiles=`wc -l $3/$1-$2.txt`
 echo "search found: $numfiles on projects"
-#export numfiles=`wc -l ~/lu/$1s-$2.txt`
-#echo "search found: $numfiles on scratch"
+export numfiles=`wc -l $3/$1s-$2.txt`
+echo "search found: $numfiles on scratch"

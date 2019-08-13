@@ -4,11 +4,11 @@
 
 if [ $# -ne 2 ]; then
   echo "Lazy scratch search"
-  echo "Usage: $0 <project> <group>"
+  echo "Usage: $0 <project> <outdir>"
   exit 0
 fi
 
 echo "Searching project $1"
-lfs find /scratch/$1 ! -group $1 -print >> ~/lu4/$1s-$2.txt
-export numfiles=`wc -l ~/lu4/$1s-$2.txt`
+lfs find /scratch/$1 ! -group $1 -print >> $2/$1s-scr.txt
+export numfiles=`wc -l $2/$1s-scr.txt`
 echo "search found: $numfiles on scratch"
