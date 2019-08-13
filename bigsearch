@@ -1,9 +1,0 @@
-#!/bin/bash 
-
-export PATH=/home/kerriw/automatic-happiness/:$PATH
-
-for projcode in `find /projects -maxdepth 1 -type d -printf "%C@ %p\n" | sort | awk '{ print $2 }' | awk -F"/" '{ print $3 }'`;
-do
-  echo $projcode
-  combosearch $projcode monashuniversity
-done
