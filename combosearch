@@ -8,9 +8,10 @@ if [ $# -ne 2 ]; then
   exit 0
 fi
 
-lfs find -group $2 /projects/$1 > ~/lu/$1.txt
-lfs find -group $2 /scratch/$1 > ~/lu/$1s.txt
-export numfiles=`wc -l ~/lu/$1.txt`
+echo "Searching project $1"
+lfs find -group $2 /projects/$1 > ~/lu/$1-$2.txt
+#lfs find -group $2 /scratch/$1 > ~/lu/$1s-$2.txt
+export numfiles=`wc -l ~/lu/$1-$2.txt`
 echo "search found: $numfiles on projects"
-export numfiles=`wc -l ~/lu/$1s.txt`
-echo "search found: $numfiles on scratch"
+#export numfiles=`wc -l ~/lu/$1s-$2.txt`
+#echo "search found: $numfiles on scratch"

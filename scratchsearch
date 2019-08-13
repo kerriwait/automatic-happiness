@@ -8,8 +8,7 @@ if [ $# -ne 2 ]; then
   exit 0
 fi
 
-mkdir -p ~/lu/
-
-lfs find -group $2 /scratch/$1 >> ~/lu/$1s.txt
-export numfiles=`wc -l ~/lu/$1s.txt`
-echo "search found: $numfiles"
+echo "Searching project $1"
+lfs find /scratch/$1 ! -group $1 -print >> ~/lu4/$1s-$2.txt
+export numfiles=`wc -l ~/lu4/$1s-$2.txt`
+echo "search found: $numfiles on scratch"

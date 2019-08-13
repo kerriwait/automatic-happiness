@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# A lazy script to clear ACLs for all files in a path, and set them to match the parent ACLs
+
+if [ $# -ne 1 ]; then
+  echo "ACL Crawler"
+  echo "Usage: $0 <top level path>"
+  exit 0
+fi
+
+echo "Crawling $1"
+getfacl $1 --omit
+find $1 -mindepth 1 -type d | xargs -n 50 setfacl -b --set-file=<(getfacl $1 --omit | sed -e 's/x$/X/')
+find $1 -mindepth 1 -type f | xargs -n 50 setfacl -b --set-file=<(getfacl $1 --omit | grep -v '^default:' | sed -e 's/x$/X/')
